@@ -1,0 +1,137 @@
+version: '3'
+
+services:
+  platform-admin:
+    image: platform-admin:latest
+    container_name: platform-admin
+    volumes:
+      - "/platform/log:/log"
+    command:
+      - "--nacos.url=127.0.0.1"
+    environment:
+      - "TZ=Asia/Shanghai"
+    ports:
+      - 8401:8401
+    restart: on-failure
+  platform-gateway:
+    image: platform-gateway:latest
+    container_name: platform-gateway
+    volumes:
+      - "/platform/log:/log"
+    command:
+      - "--platform-admin=127.0.0.1"
+      - "--mongo.url=127.0.0.1"
+      - "--nacos.url=127.0.0.1"
+      - "--redis.url=127.0.0.1"
+    environment:
+      - "TZ=Asia/Shanghai"
+    ports:
+      - 8301:8301
+    restart: on-failure
+  platform-auth:
+    image: platform-auth:latest
+    container_name: platform-auth
+    volumes:
+      - "/platform/log:/log"
+    command:
+      - "--platform-admin=127.0.0.1"
+      - "--nacos.url=127.0.0.1"
+      - "--mysql.url=127.0.0.1"
+      - "--redis.url=127.0.0.1"
+    environment:
+      - "TZ=Asia/Shanghai"
+    ports:
+      - 8101:8101
+    restart: on-failure
+  platform-server-system:
+    image: platform-server-system:latest
+    container_name: platform-server-system
+    volumes:
+      - "/platform/log:/log"
+    command:
+      - "--platform-admin=127.0.0.1"
+      - "--platform-gateway=127.0.0.1"
+      - "--nacos.url=127.0.0.1"
+      - "--mysql.url=127.0.0.1"
+      - "--platform-tx-manager=127.0.0.1"
+    environment:
+      - "TZ=Asia/Shanghai"
+    ports:
+      - 8201:8201
+    depends_on:
+      - platform-tx-manager
+    restart: on-failure
+  platform-server-test:
+    image: platform-server-foundation:latest
+    container_name: platform-server-foundation
+    volumes:
+      - "/platform/log:/log"
+    command:
+      - "--nacos.url=127.0.0.1"
+      - "--platform-admin=127.0.0.1"
+      - "--mysql.url=127.0.0.1"
+      - "--platform-tx-manager=127.0.0.1"
+      - "--platform-gateway=127.0.0.1"
+    environment:
+      - "TZ=Asia/Shanghai"
+    ports:
+      - 8202:8202
+    depends_on:
+      - platform-tx-manager
+    restart: on-failure
+  platform-server-generator:
+    image: platform-server-generator:latest
+    container_name: platform-server-generator
+    volumes:
+      - "/platform/log:/log"
+    command:
+      - "--nacos.url=127.0.0.1"
+      - "--platform-admin=127.0.0.1"
+      - "--mysql.url=127.0.0.1"
+      - "--platform-gateway=127.0.0.1"
+    environment:
+      - "TZ=Asia/Shanghai"
+    ports:
+      - 8203:8203
+    restart: on-failure
+  platform-server-job:
+    image: platform-server-job:latest
+    container_name: platform-server-job
+    volumes:
+      - "/platform/log:/log"
+    command:
+      - "--nacos.url=127.0.0.1"
+      - "--platform-admin=127.0.0.1"
+      - "--mysql.url=127.0.0.1"
+      - "--platform-gateway=127.0.0.1"
+    environment:
+      - "TZ=Asia/Shanghai"
+    ports:
+      - 8204:8204
+    restart: on-failure
+  platform-tx-manager:
+    image: platform-tx-manager:latest
+    container_name: platform-tx-manager
+    volumes:
+      - "/platform/log:/log"
+    command:
+      - "--nacos.url=127.0.0.1"
+      - "--platform-admin=127.0.0.1"
+      - "--mysql.url=127.0.0.1"
+      - "--redis.url=127.0.0.1"
+    environment:
+      - "TZ=Asia/Shanghai"
+    ports:
+      - 8501:8501
+      - 8888:8888
+    restart: on-failure
+  platform-cloud-web:
+    image: platform-cloud-web
+    container_name: platform-cloud-web
+    volumes:
+      - "/platform/log:/log"
+    environment:
+      - "TZ=Asia/Shanghai"
+    ports:
+      - 9527:80
+    restart: on-failure

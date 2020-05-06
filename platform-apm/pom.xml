@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>platform-cloud</artifactId>
+        <groupId>com.plm</groupId>
+        <version>2.0-RELEASE</version>
+        <relativePath>../platform-cloud/pom.xml</relativePath>
+    </parent>
+
+    <artifactId>platform-apm</artifactId>
+    <version>2.0-RELEASE</version>
+    <packaging>pom</packaging>
+    <name>platform-apm</name>
+    <description>系统监控模块</description>
+
+    <modules>
+        <module>platform-admin</module>
+    </modules>
+</project>

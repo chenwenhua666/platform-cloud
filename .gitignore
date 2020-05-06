@@ -1,0 +1,7 @@
+**/target/
+**/**/target/
+**/.idea/
+**/log/
+**/*.iml
+/platform-cloud/.txlcn/
+**/spy.log

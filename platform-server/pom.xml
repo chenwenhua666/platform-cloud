@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>com.plm</groupId>
+        <artifactId>platform-cloud</artifactId>
+        <version>2.0-RELEASE</version>
+        <relativePath>../platform-cloud/pom.xml</relativePath>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>platform-server</artifactId>
+    <version>2.0-RELEASE</version>
+    <packaging>pom</packaging>
+    <name>platform-server</name>
+    <description>服务提供模块</description>
+
+    <modules>
+        <module>platform-server-system</module>
+        <module>platform-server-foundation</module>
+        <module>platform-server-generator</module>
+        <module>platform-server-job</module>
+    </modules>
+
+    <dependencies>
+        <dependency>
+            <groupId>net.logstash.logback</groupId>
+            <artifactId>logstash-logback-encoder</artifactId>
+            <version>${logstash-logback-encoder.version}</version>
+        </dependency>
+    </dependencies>
+</project>
