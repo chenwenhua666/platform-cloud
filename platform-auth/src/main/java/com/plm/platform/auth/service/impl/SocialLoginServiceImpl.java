@@ -110,7 +110,7 @@ public class SocialLoginServiceImpl implements SocialLoginService {
 
     @Override
     public OAuth2AccessToken signLogin(BindUser registUser, AuthUser authUser) throws PlatformException {
-        SystemUser user = this.userManager.findByName(registUser.getBindUsername());
+        SystemUser user = this.userManager.findBySocialName(registUser.getBindUsername());
         if (user != null) {
             throw new PlatformException("该用户名已存在！");
         }

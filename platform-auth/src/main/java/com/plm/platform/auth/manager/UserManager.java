@@ -47,6 +47,16 @@ public class UserManager {
     }
 
     /**
+     * 三方登录注册通过用户名查询用户信息
+     *
+     * @param username 用户名
+     * @return 用户
+     */
+    public SystemUser findBySocialName(String username) {
+        return userMapper.findByName(username);
+    }
+
+    /**
      * 通过用户名查询用户权限串
      *
      * @param username 用户名
