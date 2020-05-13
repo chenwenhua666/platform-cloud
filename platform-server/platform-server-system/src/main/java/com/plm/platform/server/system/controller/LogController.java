@@ -2,11 +2,11 @@ package com.plm.platform.server.system.controller;
 
 import com.plm.platform.common.core.entity.PlatformResponse;
 import com.plm.platform.common.core.entity.QueryRequest;
+import com.plm.platform.common.core.entity.constant.StringConstant;
 import com.plm.platform.common.core.entity.system.Log;
 import com.plm.platform.common.core.utils.PlatformUtil;
 import com.plm.platform.server.system.annotation.ControllerEndpoint;
 import com.plm.platform.server.system.service.ILogService;
-import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.wuwenze.poi.ExcelKit;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -39,7 +39,7 @@ public class LogController {
     @PreAuthorize("hasAuthority('log:delete')")
     @ControllerEndpoint(exceptionMessage = "删除日志失败")
     public void deleteLogss(@NotBlank(message = "{required}") @PathVariable String ids) {
-        String[] logIds = ids.split(StringPool.COMMA);
+        String[] logIds = ids.split(StringConstant.COMMA);
         this.logService.deleteLogs(logIds);
     }
 

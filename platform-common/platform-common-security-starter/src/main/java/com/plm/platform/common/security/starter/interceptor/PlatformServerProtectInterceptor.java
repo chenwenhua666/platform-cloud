@@ -3,8 +3,10 @@ package com.plm.platform.common.security.starter.interceptor;
 import com.plm.platform.common.core.entity.PlatformResponse;
 import com.plm.platform.common.core.entity.constant.PlatformConstant;
 import com.plm.platform.common.core.utils.PlatformUtil;
+import com.plm.platform.common.security.starter.properties.PlatformCloudSecurityProperties;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.MediaType;
+import org.springframework.lang.NonNull;
 import org.springframework.util.Base64Utils;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -17,8 +19,13 @@ import java.io.IOException;
  */
 public class PlatformServerProtectInterceptor implements HandlerInterceptor {
 
+    private PlatformCloudSecurityProperties properties;
+
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
+    public boolean preHandle(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull Object handler) throws IOException {
+        if (!properties.getOnlyFetchByGateway()) {
+            return true;
+        }
         // 从请求头中获取 Gateway Token
         String token = request.getHeader(PlatformConstant.GATEWAY_TOKEN_HEADER);
         String gatewayToken = new String(Base64Utils.encode(PlatformConstant.GATEWAY_TOKEN_VALUE.getBytes()));
@@ -27,9 +34,12 @@ public class PlatformServerProtectInterceptor implements HandlerInterceptor {
             return true;
         } else {
             PlatformResponse platformResponse = new PlatformResponse();
-            PlatformUtil.makeResponse(response, MediaType.APPLICATION_JSON_VALUE,
-                    HttpServletResponse.SC_FORBIDDEN, platformResponse.message("请通过网关获取资源"));
+            PlatformUtil.makeJsonResponse(response, HttpServletResponse.SC_FORBIDDEN, platformResponse.message("请通过网关获取资源"));
             return false;
         }
+    }
+
+    public void setProperties(PlatformCloudSecurityProperties properties) {
+        this.properties = properties;
     }
 }

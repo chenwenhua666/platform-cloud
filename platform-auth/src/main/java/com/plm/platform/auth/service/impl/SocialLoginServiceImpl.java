@@ -10,6 +10,7 @@ import com.plm.platform.common.core.entity.PlatformResponse;
 import com.plm.platform.common.core.entity.constant.GrantTypeConstant;
 import com.plm.platform.common.core.entity.constant.ParamsConstant;
 import com.plm.platform.common.core.entity.constant.SocialConstant;
+import com.plm.platform.common.core.entity.constant.StringConstant;
 import com.plm.platform.common.core.entity.system.SystemUser;
 import com.plm.platform.common.core.exception.PlatformException;
 import com.plm.platform.common.core.utils.PlatformUtil;
@@ -110,7 +111,7 @@ public class SocialLoginServiceImpl implements SocialLoginService {
 
     @Override
     public OAuth2AccessToken signLogin(BindUser registUser, AuthUser authUser) throws PlatformException {
-        SystemUser user = this.userManager.findBySocialName(registUser.getBindUsername());
+        SystemUser user = this.userManager.findByName(registUser.getBindUsername());
         if (user != null) {
             throw new PlatformException("该用户名已存在！");
         }
@@ -166,9 +167,9 @@ public class SocialLoginServiceImpl implements SocialLoginService {
     private AuthCallback resolveAuthCallback(AuthCallback callback) {
         int stateLength = 3;
         String state = callback.getState();
-        String[] strings = StringUtils.splitByWholeSeparatorPreserveAllTokens(state, "::");
+        String[] strings = StringUtils.splitByWholeSeparatorPreserveAllTokens(state, StringConstant.DOUBLE_COLON);
         if (strings.length == stateLength) {
-            callback.setState(strings[0] + "::" + strings[1]);
+            callback.setState(strings[0] + StringConstant.DOUBLE_COLON + strings[1]);
         }
         return callback;
     }
@@ -204,7 +205,7 @@ public class SocialLoginServiceImpl implements SocialLoginService {
         requestParameters.put(USERNAME, user.getUsername());
         requestParameters.put(PASSWORD, SocialConstant.SOCIAL_LOGIN_PASSWORD);
 
-        String grantTypes = String.join(",", clientDetails.getAuthorizedGrantTypes());
+        String grantTypes = String.join(StringConstant.COMMA, clientDetails.getAuthorizedGrantTypes());
         TokenRequest tokenRequest = new TokenRequest(requestParameters, clientDetails.getClientId(), clientDetails.getScope(), grantTypes);
         return granter.grant(GrantTypeConstant.PASSWORD, tokenRequest);
     }

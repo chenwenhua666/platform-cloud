@@ -2,6 +2,7 @@ package com.plm.platform.server.system.controller;
 
 import com.plm.platform.common.core.entity.PlatformResponse;
 import com.plm.platform.common.core.entity.QueryRequest;
+import com.plm.platform.common.core.entity.constant.StringConstant;
 import com.plm.platform.common.core.entity.system.LoginLog;
 import com.plm.platform.common.core.entity.system.SystemUser;
 import com.plm.platform.common.core.exception.PlatformException;
@@ -10,7 +11,6 @@ import com.plm.platform.server.system.annotation.ControllerEndpoint;
 import com.plm.platform.server.system.service.ILoginLogService;
 import com.plm.platform.server.system.service.IUserDataPermissionService;
 import com.plm.platform.server.system.service.IUserService;
-import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.wuwenze.poi.ExcelKit;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -112,7 +112,7 @@ public class UserController {
     @PreAuthorize("hasAuthority('user:delete')")
     @ControllerEndpoint(operation = "删除用户", exceptionMessage = "删除用户失败")
     public void deleteUsers(@NotBlank(message = "{required}") @PathVariable String userIds) {
-        String[] ids = userIds.split(StringPool.COMMA);
+        String[] ids = userIds.split(StringConstant.COMMA);
         this.userService.deleteUsers(ids);
     }
 
@@ -145,7 +145,7 @@ public class UserController {
     @PreAuthorize("hasAuthority('user:reset')")
     @ControllerEndpoint(exceptionMessage = "重置用户密码失败")
     public void resetPassword(@NotBlank(message = "{required}") String usernames) {
-        String[] usernameArr = usernames.split(StringPool.COMMA);
+        String[] usernameArr = usernames.split(StringConstant.COMMA);
         this.userService.resetPassword(usernameArr);
     }
 

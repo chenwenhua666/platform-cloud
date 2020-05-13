@@ -21,6 +21,7 @@
         <module>platform-server-foundation</module>
         <module>platform-server-generator</module>
         <module>platform-server-job</module>
+        <module>platform-server-statistics</module>
     </modules>
 
     <dependencies>

@@ -4,11 +4,11 @@ import com.plm.platform.auth.mapper.MenuMapper;
 import com.plm.platform.auth.mapper.UserMapper;
 import com.plm.platform.auth.mapper.UserRoleMapper;
 import com.plm.platform.common.core.entity.constant.PlatformConstant;
+import com.plm.platform.common.core.entity.constant.StringConstant;
 import com.plm.platform.common.core.entity.system.Menu;
 import com.plm.platform.common.core.entity.system.SystemUser;
 import com.plm.platform.common.core.entity.system.UserDataPermission;
 import com.plm.platform.common.core.entity.system.UserRole;
-import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -40,20 +40,12 @@ public class UserManager {
      */
     public SystemUser findByName(String username) {
         SystemUser user = userMapper.findByName(username);
-        List<UserDataPermission> permissions = userMapper.findUserDataPermissions(user.getUserId());
-        String deptIds = permissions.stream().map(p -> String.valueOf(p.getDeptId())).collect(Collectors.joining(StringPool.COMMA));
-        user.setDeptIds(deptIds);
+        if (user != null) {
+            List<UserDataPermission> permissions = userMapper.findUserDataPermissions(user.getUserId());
+            String deptIds = permissions.stream().map(p -> String.valueOf(p.getDeptId())).collect(Collectors.joining(StringConstant.COMMA));
+            user.setDeptIds(deptIds);
+        }
         return user;
-    }
-
-    /**
-     * 三方登录注册通过用户名查询用户信息
-     *
-     * @param username 用户名
-     * @return 用户
-     */
-    public SystemUser findBySocialName(String username) {
-        return userMapper.findByName(username);
     }
 
     /**

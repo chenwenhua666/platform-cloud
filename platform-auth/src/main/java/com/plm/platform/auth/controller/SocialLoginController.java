@@ -4,6 +4,7 @@ import com.plm.platform.auth.entity.BindUser;
 import com.plm.platform.auth.entity.UserConnection;
 import com.plm.platform.auth.service.SocialLoginService;
 import com.plm.platform.common.core.entity.PlatformResponse;
+import com.plm.platform.common.core.entity.constant.StringConstant;
 import com.plm.platform.common.core.exception.PlatformException;
 import com.plm.platform.common.core.utils.PlatformUtil;
 import lombok.RequiredArgsConstructor;
@@ -41,7 +42,6 @@ public class SocialLoginController {
     @Value("${platform.frontUrl}")
     private String frontUrl;
 
-
     /**
      * 登录
      *
@@ -52,7 +52,7 @@ public class SocialLoginController {
     @GetMapping("/login/{oauthType}/{type}")
     public void renderAuth(@PathVariable String oauthType, @PathVariable String type, HttpServletResponse response) throws IOException, PlatformException {
         AuthRequest authRequest = socialLoginService.renderAuth(oauthType);
-        response.sendRedirect(authRequest.authorize(oauthType + "::" + AuthStateUtils.createState()) + "::" + type);
+        response.sendRedirect(authRequest.authorize(oauthType + StringConstant.DOUBLE_COLON + AuthStateUtils.createState()) + StringConstant.DOUBLE_COLON + type);
     }
 
     /**
@@ -66,7 +66,7 @@ public class SocialLoginController {
     public String login(@PathVariable String oauthType, AuthCallback callback, String state, Model model) {
         try {
             PlatformResponse platformResponse = null;
-            String type = StringUtils.substringAfterLast(state, "::");
+            String type = StringUtils.substringAfterLast(state, StringConstant.DOUBLE_COLON);
             if (StringUtils.equals(type, TYPE_BIND)) {
                 platformResponse = socialLoginService.resolveBind(oauthType, callback);
             } else {
@@ -78,7 +78,7 @@ public class SocialLoginController {
         } catch (Exception e) {
             String errorMessage = PlatformUtil.containChinese(e.getMessage()) ? e.getMessage() : "第三方登录失败";
             model.addAttribute("error", e.getMessage());
-            return "error";
+            return "fail";
         }
     }
 

@@ -2,10 +2,10 @@ package com.plm.platform.server.system.controller;
 
 import com.plm.platform.common.core.entity.PlatformResponse;
 import com.plm.platform.common.core.entity.QueryRequest;
+import com.plm.platform.common.core.entity.constant.StringConstant;
 import com.plm.platform.common.core.entity.system.Dept;
 import com.plm.platform.server.system.annotation.ControllerEndpoint;
 import com.plm.platform.server.system.service.IDeptService;
-import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.wuwenze.poi.ExcelKit;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -48,7 +48,7 @@ public class DeptController {
     @PreAuthorize("hasAuthority('dept:delete')")
     @ControllerEndpoint(operation = "删除部门", exceptionMessage = "删除部门失败")
     public void deleteDepts(@NotBlank(message = "{required}") @PathVariable String deptIds) {
-        String[] ids = deptIds.split(StringPool.COMMA);
+        String[] ids = deptIds.split(StringConstant.COMMA);
         this.deptService.deleteDepts(ids);
     }
 

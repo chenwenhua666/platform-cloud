@@ -6,6 +6,7 @@ import com.plm.platform.common.security.starter.handler.PlatformAccessDeniedHand
 import com.plm.platform.common.security.starter.handler.PlatformAuthExceptionEntryPoint;
 import com.plm.platform.common.security.starter.properties.PlatformCloudSecurityProperties;
 import feign.RequestInterceptor;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -53,7 +54,9 @@ public class PlatformCloudSecurityAutoconfigure {
             String gatewayToken = new String(Base64Utils.encode(PlatformConstant.GATEWAY_TOKEN_VALUE.getBytes()));
             requestTemplate.header(PlatformConstant.GATEWAY_TOKEN_HEADER, gatewayToken);
             String authorizationToken = PlatformUtil.getCurrentTokenValue();
-            requestTemplate.header(HttpHeaders.AUTHORIZATION, PlatformConstant.OAUTH2_TOKEN_TYPE + authorizationToken);
+            if (StringUtils.isNotBlank(authorizationToken)) {
+                requestTemplate.header(HttpHeaders.AUTHORIZATION, PlatformConstant.OAUTH2_TOKEN_TYPE + authorizationToken);
+            }
         };
     }
 }

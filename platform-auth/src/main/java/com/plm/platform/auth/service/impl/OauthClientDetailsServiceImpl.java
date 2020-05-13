@@ -4,6 +4,7 @@ import com.plm.platform.auth.entity.OauthClientDetails;
 import com.plm.platform.auth.mapper.OauthClientDetailsMapper;
 import com.plm.platform.auth.service.OauthClientDetailsService;
 import com.plm.platform.common.core.entity.QueryRequest;
+import com.plm.platform.common.core.entity.constant.StringConstant;
 import com.plm.platform.common.core.exception.PlatformException;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -94,7 +95,7 @@ public class OauthClientDetailsServiceImpl extends ServiceImpl<OauthClientDetail
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void deleteOauthClientDetails(String clientIds) {
-        Object[] clientIdArray = StringUtils.splitByWholeSeparatorPreserveAllTokens(clientIds, ",");
+        Object[] clientIdArray = StringUtils.splitByWholeSeparatorPreserveAllTokens(clientIds, StringConstant.COMMA);
         LambdaQueryWrapper<OauthClientDetails> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.in(OauthClientDetails::getClientId, clientIdArray);
         boolean removed = this.remove(queryWrapper);

@@ -18,8 +18,6 @@ public class PlatformAccessDeniedHandler implements AccessDeniedHandler {
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException {
         PlatformResponse platformResponse = new PlatformResponse();
-        PlatformUtil.makeResponse(
-                response, MediaType.APPLICATION_JSON_VALUE,
-                HttpServletResponse.SC_FORBIDDEN, platformResponse.message("没有权限访问该资源"));
+        PlatformUtil.makeJsonResponse(response, HttpServletResponse.SC_FORBIDDEN, platformResponse.message("没有权限访问该资源"));
     }
 }

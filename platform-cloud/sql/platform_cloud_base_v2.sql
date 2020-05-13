@@ -11,7 +11,7 @@
  Target Server Version : 50723
  File Encoding         : 65001
 
- Date: 06/05/2020 20:47:02
+ Date: 13/05/2020 17:34:19
 */
 
 SET NAMES utf8mb4;
@@ -40,8 +40,9 @@ CREATE TABLE `oauth_client_details`  (
 -- ----------------------------
 -- Records of oauth_client_details
 -- ----------------------------
-INSERT INTO `oauth_client_details` VALUES ('app', '', '$2a$10$8Qk/efslEpO1Af1kyw/rp.DdJGsdnET8UCp1vGDzpQEa.1qBklvua', 'all', 'refresh_token,password', '', NULL, 86400, 864000, NULL, NULL, '123456');
-INSERT INTO `oauth_client_details` VALUES ('platform', '', '$2a$10$WqyC7Uiv5hSATt5F2VNTQuY4ITQs2BVmm4lfgIB2umypCZmUDt2Lu', 'all', 'refresh_token,password', '', NULL, 86400, 8640000, NULL, 1, '123456a_');
+INSERT INTO `oauth_client_details` VALUES ('app', '', '$2a$10$8Qk/efslEpO1Af1kyw/rp.DdJGsdnET8UCp1vGDzpQEa.1qBklvua', 'all', 'refresh_token,password', '', NULL, 86400, 864000, NULL, 0, '123456');
+INSERT INTO `oauth_client_details` VALUES ('code', '', '$2a$10$VJMqqnP14QbkO8IS/mNM6.JmeXQjeoCKsXKOpzePs51q3414forOa', 'all', 'refresh_token,authorization_code,client_credentials,password,implicit', 'http://www.baidu.com', NULL, 86400, 864000, NULL, 1, '123456');
+INSERT INTO `oauth_client_details` VALUES ('platform', '', '$2a$10$WqyC7Uiv5hSATt5F2VNTQuY4ITQs2BVmm4lfgIB2umypCZmUDt2Lu', 'all', 'refresh_token,password', '', NULL, 86400, 8640000, NULL, 0, '123456a_');
 
 -- ----------------------------
 -- Table structure for t_data_permission_test
@@ -206,7 +207,7 @@ CREATE TABLE `t_log`  (
   `LOCATION` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '操作地点',
   PRIMARY KEY (`ID`) USING BTREE,
   INDEX `t_log_create_time`(`CREATE_TIME`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 11 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户操作日志表' ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 25 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户操作日志表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of t_log
@@ -245,7 +246,7 @@ CREATE TABLE `t_login_log`  (
   `BROWSER` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '浏览器',
   PRIMARY KEY (`ID`) USING BTREE,
   INDEX `t_login_log_login_time`(`LOGIN_TIME`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 17 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '登录日志表' ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 59 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '登录日志表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of t_login_log
@@ -348,7 +349,7 @@ CREATE TABLE `t_role`  (
   `CREATE_TIME` datetime(0) NOT NULL COMMENT '创建时间',
   `MODIFY_TIME` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`ROLE_ID`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '角色表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '角色表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of t_role
@@ -561,8 +562,8 @@ CREATE TABLE `t_user`  (
 -- ----------------------------
 -- Records of t_user
 -- ----------------------------
-INSERT INTO `t_user` VALUES (1, 'admin', '$2a$10$YPRzfYQCvN/1OXw2.0HjKuI7elxPoHlZZ9nJCsPoruTzybyU9HhrW', 2, '764471698@qq.com', '18888888888', '1', '2019-06-14 20:39:22', '2020-04-15 16:00:32', '2020-05-06 17:07:45', '0', '1', 'white', 'default.jpg', '面对疾风吧');
-INSERT INTO `t_user` VALUES (15, 'scott', '$2a$10$MTrnLIomqmHn7208Fi4ZbeaUe3aOQ2ZoapIniqeInzA7/BEmSFFoe', 5, '764471698@qq.com', '18888888888', '1', '2019-07-20 19:00:32', '2020-05-06 14:07:57', '2020-05-06 14:44:46', '2', NULL, NULL, '20180414165815.jpg', NULL);
+INSERT INTO `t_user` VALUES (1, 'admin', '$2a$10$YPRzfYQCvN/1OXw2.0HjKuI7elxPoHlZZ9nJCsPoruTzybyU9HhrW', 2, '764471698@qq.com', '18888888888', '1', '2019-06-14 20:39:22', '2020-04-15 16:00:32', '2020-05-13 17:16:02', '0', '1', 'white', 'default.jpg', '面对疾风吧');
+INSERT INTO `t_user` VALUES (15, 'scott', '$2a$10$MTrnLIomqmHn7208Fi4ZbeaUe3aOQ2ZoapIniqeInzA7/BEmSFFoe', 5, '764471698@qq.com', '18888888888', '1', '2019-07-20 19:00:32', '2020-05-06 14:07:57', '2020-05-12 15:24:09', '2', NULL, NULL, '20180414165815.jpg', NULL);
 INSERT INTO `t_user` VALUES (16, 'jack', '$2a$10$yU4BjESDm02Fk3Aq7OM3TurJz3Hxjr.pUSxayiVy/JQRkT4XCKNiS', 4, '764471698@qq.com', '18366666666', '1', '2019-09-01 10:31:21', '2020-05-06 14:08:22', '2020-05-06 14:48:01', '1', NULL, NULL, 'jZUIxmJycoymBprLOUbT.png', NULL);
 
 -- ----------------------------
@@ -585,6 +586,8 @@ CREATE TABLE `t_user_connection`  (
 -- ----------------------------
 -- Records of t_user_connection
 -- ----------------------------
+INSERT INTO `t_user_connection` VALUES ('admin', 'GITEE', '5523383', 'chenwenhua666', 'chenwenhua666', 'https://portrait.gitee.com/uploads/avatars/user/1841/5523383_chenwenhua666_1588840866.png', NULL, NULL);
+INSERT INTO `t_user_connection` VALUES ('admin', 'GITHUB', '41222109', 'chenwenhua666', NULL, 'https://avatars0.githubusercontent.com/u/41222109?v=4', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for t_user_data_permission

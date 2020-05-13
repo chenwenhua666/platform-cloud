@@ -24,6 +24,6 @@ public class PlatformAuthExceptionEntryPoint implements AuthenticationEntryPoint
         int status = HttpServletResponse.SC_UNAUTHORIZED;
         String message = "访问令牌不合法";
         log.error("客户端访问{}请求失败: {}", requestUri, message, authException);
-        PlatformUtil.makeResponse(response, MediaType.APPLICATION_JSON_VALUE, status, new PlatformResponse().message(message));
+        PlatformUtil.makeJsonResponse(response, status, new PlatformResponse().message(message));
     }
 }

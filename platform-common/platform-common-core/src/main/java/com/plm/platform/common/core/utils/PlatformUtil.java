@@ -6,12 +6,15 @@ import com.plm.platform.common.core.entity.constant.PageConstant;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.plm.platform.common.core.entity.constant.RegexpConstant;
+import com.plm.platform.common.core.entity.constant.StringConstant;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.security.core.Authentication;
@@ -40,7 +43,6 @@ import java.util.stream.IntStream;
 @Slf4j
 public class PlatformUtil {
 
-    private static final Pattern CHINESE_PATTERN = Pattern.compile("[\u4e00-\u9fa5]");
     private static final String UNKNOW = "unknown";
 
     /**
@@ -76,7 +78,7 @@ public class PlatformUtil {
      */
     public static String underscoreToCamel(String value) {
         StringBuilder result = new StringBuilder();
-        String[] arr = value.split("_");
+        String[] arr = value.split(StringConstant.UNDER_LINE);
         for (String s : arr) {
             result.append((String.valueOf(s.charAt(0))).toUpperCase()).append(s.substring(1));
         }
@@ -121,6 +123,40 @@ public class PlatformUtil {
         response.setContentType(contentType);
         response.setStatus(status);
         response.getOutputStream().write(JSONObject.toJSONString(value).getBytes());
+    }
+
+    /**
+     * 设置成功响应
+     *
+     * @param response HttpServletResponse
+     * @param value    响应内容
+     * @throws IOException IOException
+     */
+    public static void makeSuccessResponse(HttpServletResponse response, Object value) throws IOException {
+        makeResponse(response, MediaType.APPLICATION_JSON_VALUE, HttpServletResponse.SC_OK, value);
+    }
+
+    /**
+     * 设置失败响应
+     *
+     * @param response HttpServletResponse
+     * @param value    响应内容
+     * @throws IOException IOException
+     */
+    public static void makeFailureResponse(HttpServletResponse response, Object value) throws IOException {
+        makeResponse(response, MediaType.APPLICATION_JSON_VALUE, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, value);
+    }
+
+    /**
+     * 设置JSON类型响应
+     *
+     * @param response HttpServletResponse
+     * @param status   http状态码
+     * @param value    响应内容
+     * @throws IOException IOException
+     */
+    public static void makeJsonResponse(HttpServletResponse response, int status, Object value) throws IOException {
+        makeResponse(response, MediaType.APPLICATION_JSON_VALUE, status, value);
     }
 
     /**
@@ -192,8 +228,8 @@ public class PlatformUtil {
         HttpHeaders headers = request.getHeaders();
         String ip = headers.getFirst("x-forwarded-for");
         if (ip != null && ip.length() != 0 && !UNKNOW.equalsIgnoreCase(ip)) {
-            if (ip.contains(",")) {
-                ip = ip.split(",")[0];
+            if (ip.contains(StringConstant.COMMA)) {
+                ip = ip.split(StringConstant.COMMA)[0];
             }
         }
         if (ip == null || ip.length() == 0 || UNKNOW.equalsIgnoreCase(ip)) {
@@ -227,7 +263,7 @@ public class PlatformUtil {
         if (StringUtils.isBlank(value)) {
             return Boolean.FALSE;
         }
-        Matcher matcher = CHINESE_PATTERN.matcher(value);
+        Matcher matcher = RegexpConstant.CHINESE.matcher(value);
         return matcher.find();
     }
 
@@ -276,8 +312,12 @@ public class PlatformUtil {
      * @return String 令牌内容
      */
     public static String getCurrentTokenValue() {
-        OAuth2AuthenticationDetails details = (OAuth2AuthenticationDetails) getOauth2Authentication().getDetails();
-        return details.getTokenValue();
+        try {
+            OAuth2AuthenticationDetails details = (OAuth2AuthenticationDetails) getOauth2Authentication().getDetails();
+            return details.getTokenValue();
+        } catch (Exception ignore) {
+            return null;
+        }
     }
 
     public static void printSystemUpBanner(Environment environment) {

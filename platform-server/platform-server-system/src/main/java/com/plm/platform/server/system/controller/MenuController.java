@@ -1,11 +1,11 @@
 package com.plm.platform.server.system.controller;
 
 import com.plm.platform.common.core.entity.PlatformResponse;
+import com.plm.platform.common.core.entity.constant.StringConstant;
 import com.plm.platform.common.core.entity.router.VueRouter;
 import com.plm.platform.common.core.entity.system.Menu;
 import com.plm.platform.server.system.annotation.ControllerEndpoint;
 import com.plm.platform.server.system.service.IMenuService;
-import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.wuwenze.poi.ExcelKit;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -69,7 +69,7 @@ public class MenuController {
     @PreAuthorize("hasAuthority('menu:delete')")
     @ControllerEndpoint(operation = "删除菜单/按钮", exceptionMessage = "删除菜单/按钮失败")
     public void deleteMenus(@NotBlank(message = "{required}") @PathVariable String menuIds) {
-        String[] ids = menuIds.split(StringPool.COMMA);
+        String[] ids = menuIds.split(StringConstant.COMMA);
         this.menuService.deleteMeuns(ids);
     }
 
