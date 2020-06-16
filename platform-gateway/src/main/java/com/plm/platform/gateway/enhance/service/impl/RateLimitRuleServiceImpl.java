@@ -1,6 +1,7 @@
 package com.plm.platform.gateway.enhance.service.impl;
 
 import com.plm.platform.common.core.entity.QueryRequest;
+import com.plm.platform.common.core.entity.constant.StringConstant;
 import com.plm.platform.common.core.utils.DateUtil;
 import com.plm.platform.gateway.enhance.entity.RateLimitRule;
 import com.plm.platform.gateway.enhance.mapper.RateLimitRuleMapper;
@@ -83,7 +84,7 @@ public class RateLimitRuleServiceImpl implements RateLimitRuleService {
 
     @Override
     public Flux<RateLimitRule> delete(String ids) {
-        String[] idArray = StringUtils.splitByWholeSeparatorPreserveAllTokens(ids, ",");
+        String[] idArray = StringUtils.splitByWholeSeparatorPreserveAllTokens(ids, StringConstant.COMMA);
         return rateLimitRuleMapper.deleteByIdIn(Arrays.asList(idArray))
                 .doOnNext(routeEnhanceCacheService::removeRateLimitRule);
     }

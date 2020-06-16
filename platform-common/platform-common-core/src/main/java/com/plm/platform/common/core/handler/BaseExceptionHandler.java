@@ -1,6 +1,7 @@
 package com.plm.platform.common.core.handler;
 
 import com.plm.platform.common.core.entity.PlatformResponse;
+import com.plm.platform.common.core.entity.constant.StringConstant;
 import com.plm.platform.common.core.exception.PlatformException;
 import com.plm.platform.common.core.exception.FileDownloadException;
 import com.plm.platform.common.core.utils.PlatformUtil;
@@ -55,7 +56,7 @@ public class BaseExceptionHandler {
         StringBuilder message = new StringBuilder();
         List<FieldError> fieldErrors = e.getBindingResult().getFieldErrors();
         for (FieldError error : fieldErrors) {
-            message.append(error.getField()).append(error.getDefaultMessage()).append(",");
+            message.append(error.getField()).append(error.getDefaultMessage()).append(StringConstant.COMMA);
         }
         message = new StringBuilder(message.substring(0, message.length() - 1));
         log.error(message.toString());
@@ -76,7 +77,7 @@ public class BaseExceptionHandler {
         for (ConstraintViolation<?> violation : violations) {
             Path path = violation.getPropertyPath();
             String[] pathArr = StringUtils.splitByWholeSeparatorPreserveAllTokens(path.toString(), ".");
-            message.append(pathArr[1]).append(violation.getMessage()).append(",");
+            message.append(pathArr[1]).append(violation.getMessage()).append(StringConstant.COMMA);
         }
         message = new StringBuilder(message.substring(0, message.length() - 1));
         log.error(message.toString());
@@ -94,7 +95,7 @@ public class BaseExceptionHandler {
     public PlatformResponse handlerMethodArgumentNotValidException(MethodArgumentNotValidException e) {
         StringBuilder message = new StringBuilder();
         for (FieldError error : e.getBindingResult().getFieldErrors()) {
-            message.append(error.getField()).append(error.getDefaultMessage()).append(",");
+            message.append(error.getField()).append(error.getDefaultMessage()).append(StringConstant.COMMA);
         }
         message = new StringBuilder(message.substring(0, message.length() - 1));
         log.error(message.toString());

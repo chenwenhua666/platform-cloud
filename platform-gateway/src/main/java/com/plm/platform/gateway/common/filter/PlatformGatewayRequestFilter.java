@@ -32,10 +32,10 @@ public class PlatformGatewayRequestFilter implements GlobalFilter {
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         if (routeEhance) {
-            Mono<Void> balckListResult = routeEnhanceService.filterBalckList(exchange);
-            if (balckListResult != null) {
+            Mono<Void> blackListResult = routeEnhanceService.filterBlackList(exchange);
+            if (blackListResult != null) {
                 routeEnhanceService.saveBlockLogs(exchange);
-                return balckListResult;
+                return blackListResult;
             }
             Mono<Void> rateLimitResult = routeEnhanceService.filterRateLimit(exchange);
             if (rateLimitResult != null) {

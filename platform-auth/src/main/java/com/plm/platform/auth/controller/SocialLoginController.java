@@ -77,7 +77,7 @@ public class SocialLoginController {
             return "result";
         } catch (Exception e) {
             String errorMessage = PlatformUtil.containChinese(e.getMessage()) ? e.getMessage() : "第三方登录失败";
-            model.addAttribute("error", e.getMessage());
+            model.addAttribute("error", errorMessage);
             return "fail";
         }
     }

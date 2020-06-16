@@ -1,6 +1,7 @@
 package com.plm.platform.gateway.enhance.service.impl;
 
 import com.plm.platform.common.core.entity.QueryRequest;
+import com.plm.platform.common.core.entity.constant.StringConstant;
 import com.plm.platform.common.core.utils.DateUtil;
 import com.plm.platform.gateway.enhance.entity.BlackList;
 import com.plm.platform.gateway.enhance.mapper.BlackListMapper;
@@ -70,7 +71,7 @@ public class BlackListServiceImpl implements BlackListService {
 
     @Override
     public Flux<BlackList> delete(String ids) {
-        String[] idArray = StringUtils.splitByWholeSeparatorPreserveAllTokens(ids, ",");
+        String[] idArray = StringUtils.splitByWholeSeparatorPreserveAllTokens(ids, StringConstant.COMMA);
         return blackListMapper.deleteByIdIn(Arrays.asList(idArray))
                 .doOnNext(routeEnhanceCacheService::removeBlackList);
     }

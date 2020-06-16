@@ -7,7 +7,7 @@ services:
     volumes:
       - "/platform/log:/log"
     command:
-      - "--nacos.url=127.0.0.1"
+      - "--nacos.url=47.105.198.196"
     environment:
       - "TZ=Asia/Shanghai"
     ports:
@@ -19,10 +19,10 @@ services:
     volumes:
       - "/platform/log:/log"
     command:
-      - "--platform-admin=127.0.0.1"
-      - "--mongo.url=127.0.0.1"
-      - "--nacos.url=127.0.0.1"
-      - "--redis.url=127.0.0.1"
+      - "--platform-admin=47.105.198.196"
+      - "--mongo.url=47.105.198.196"
+      - "--nacos.url=47.105.198.196"
+      - "--redis.url=47.105.198.196"
     environment:
       - "TZ=Asia/Shanghai"
     ports:
@@ -34,10 +34,10 @@ services:
     volumes:
       - "/platform/log:/log"
     command:
-      - "--platform-admin=127.0.0.1"
-      - "--nacos.url=127.0.0.1"
-      - "--mysql.url=127.0.0.1"
-      - "--redis.url=127.0.0.1"
+      - "--platform-admin=47.105.198.196"
+      - "--nacos.url=47.105.198.196"
+      - "--mysql.url=47.105.198.196"
+      - "--redis.url=47.105.198.196"
     environment:
       - "TZ=Asia/Shanghai"
     ports:
@@ -49,11 +49,11 @@ services:
     volumes:
       - "/platform/log:/log"
     command:
-      - "--platform-admin=127.0.0.1"
-      - "--platform-gateway=127.0.0.1"
-      - "--nacos.url=127.0.0.1"
-      - "--mysql.url=127.0.0.1"
-      - "--platform-tx-manager=127.0.0.1"
+      - "--platform-admin=47.105.198.196"
+      - "--platform-gateway=47.105.198.196"
+      - "--nacos.url=47.105.198.196"
+      - "--mysql.url=47.105.198.196"
+      - "--platform-tx-manager=47.105.198.196"
     environment:
       - "TZ=Asia/Shanghai"
     ports:
@@ -67,11 +67,11 @@ services:
     volumes:
       - "/platform/log:/log"
     command:
-      - "--nacos.url=127.0.0.1"
-      - "--platform-admin=127.0.0.1"
-      - "--mysql.url=127.0.0.1"
-      - "--platform-tx-manager=127.0.0.1"
-      - "--platform-gateway=127.0.0.1"
+      - "--nacos.url=47.105.198.196"
+      - "--platform-admin=47.105.198.196"
+      - "--mysql.url=47.105.198.196"
+      - "--platform-tx-manager=47.105.198.196"
+      - "--platform-gateway=47.105.198.196"
     environment:
       - "TZ=Asia/Shanghai"
     ports:
@@ -85,10 +85,10 @@ services:
     volumes:
       - "/platform/log:/log"
     command:
-      - "--nacos.url=127.0.0.1"
-      - "--platform-admin=127.0.0.1"
-      - "--mysql.url=127.0.0.1"
-      - "--platform-gateway=127.0.0.1"
+      - "--nacos.url=47.105.198.196"
+      - "--platform-admin=47.105.198.196"
+      - "--mysql.url=47.105.198.196"
+      - "--platform-gateway=47.105.198.196"
     environment:
       - "TZ=Asia/Shanghai"
     ports:
@@ -100,10 +100,10 @@ services:
     volumes:
       - "/platform/log:/log"
     command:
-      - "--nacos.url=127.0.0.1"
-      - "--platform-admin=127.0.0.1"
-      - "--mysql.url=127.0.0.1"
-      - "--platform-gateway=127.0.0.1"
+      - "--nacos.url=47.105.198.196"
+      - "--platform-admin=47.105.198.196"
+      - "--mysql.url=47.105.198.196"
+      - "--platform-gateway=47.105.198.196"
     environment:
       - "TZ=Asia/Shanghai"
     ports:
@@ -115,19 +115,19 @@ services:
     volumes:
       - "/platform/log:/log"
     command:
-      - "--nacos.url=127.0.0.1"
-      - "--platform-admin=127.0.0.1"
-      - "--mysql.url=127.0.0.1"
-      - "--redis.url=127.0.0.1"
+      - "--nacos.url=47.105.198.196"
+      - "--platform-admin=47.105.198.196"
+      - "--mysql.url=47.105.198.196"
+      - "--redis.url=47.105.198.196"
     environment:
       - "TZ=Asia/Shanghai"
     ports:
       - 8501:8501
       - 8888:8888
     restart: on-failure
-  platform-cloud-web:
-    image: platform-cloud-web
-    container_name: platform-cloud-web
+  platform-cloud-manage:
+    image: platform-cloud-manage:latest
+    container_name: platform-cloud-manage
     volumes:
       - "/platform/log:/log"
     environment:

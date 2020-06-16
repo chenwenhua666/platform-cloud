@@ -2,6 +2,7 @@ package com.plm.platform.server.system.service.impl;
 
 import com.plm.platform.common.core.entity.QueryRequest;
 import com.plm.platform.common.core.entity.constant.PlatformConstant;
+import com.plm.platform.common.core.entity.constant.StringConstant;
 import com.plm.platform.common.core.entity.system.Role;
 import com.plm.platform.common.core.entity.system.RoleMenu;
 import com.plm.platform.common.core.utils.SortUtil;
@@ -68,7 +69,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IR
         this.save(role);
 
         if (StringUtils.isNotBlank(role.getMenuIds())) {
-            String[] menuIds = StringUtils.splitByWholeSeparatorPreserveAllTokens(role.getMenuIds(), ",");
+            String[] menuIds = StringUtils.splitByWholeSeparatorPreserveAllTokens(role.getMenuIds(), StringConstant.COMMA);
             setRoleMenus(role, menuIds);
         }
     }
@@ -92,7 +93,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IR
 
         roleMenuService.remove(new LambdaQueryWrapper<RoleMenu>().eq(RoleMenu::getRoleId, role.getRoleId()));
         if (StringUtils.isNotBlank(role.getMenuIds())) {
-            String[] menuIds = StringUtils.splitByWholeSeparatorPreserveAllTokens(role.getMenuIds(), ",");
+            String[] menuIds = StringUtils.splitByWholeSeparatorPreserveAllTokens(role.getMenuIds(), StringConstant.COMMA);
             setRoleMenus(role, menuIds);
         }
     }

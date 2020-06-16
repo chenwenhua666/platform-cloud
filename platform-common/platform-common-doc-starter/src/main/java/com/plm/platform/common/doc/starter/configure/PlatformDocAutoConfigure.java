@@ -30,11 +30,11 @@ import java.util.List;
 @Import(BeanValidatorPluginsConfiguration.class)
 @EnableConfigurationProperties(PlatformDocProperties.class)
 @ConditionalOnProperty(value = "platform.doc.enable", havingValue = "true", matchIfMissing = true)
-public class PlatformDocAutoconfigure {
+public class PlatformDocAutoConfigure {
 
     private final PlatformDocProperties properties;
 
-    public PlatformDocAutoconfigure(PlatformDocProperties properties) {
+    public PlatformDocAutoConfigure(PlatformDocProperties properties) {
         this.properties = properties;
     }
 

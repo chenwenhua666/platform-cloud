@@ -3,6 +3,7 @@ package com.plm.platform.server.system.service.impl;
 import com.plm.platform.common.core.entity.MenuTree;
 import com.plm.platform.common.core.entity.Tree;
 import com.plm.platform.common.core.entity.constant.PageConstant;
+import com.plm.platform.common.core.entity.constant.StringConstant;
 import com.plm.platform.common.core.entity.router.RouterMeta;
 import com.plm.platform.common.core.entity.router.VueRouter;
 import com.plm.platform.common.core.entity.system.Menu;
@@ -32,7 +33,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
     @Override
     public String findUserPermissions(String username) {
         List<Menu> userPermissions = this.baseMapper.findUserPermissions(username);
-        return userPermissions.stream().map(Menu::getPerms).collect(Collectors.joining(","));
+        return userPermissions.stream().map(Menu::getPerms).collect(Collectors.joining(StringConstant.COMMA));
     }
 
     @Override

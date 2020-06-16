@@ -1,5 +1,6 @@
 package com.plm.platform.common.security.starter.configure;
 
+import com.plm.platform.common.core.entity.constant.StringConstant;
 import com.plm.platform.common.security.starter.handler.PlatformAccessDeniedHandler;
 import com.plm.platform.common.security.starter.handler.PlatformAuthExceptionEntryPoint;
 import com.plm.platform.common.security.starter.properties.PlatformCloudSecurityProperties;
@@ -41,7 +42,7 @@ public class PlatformCloudResourceServerConfigure extends ResourceServerConfigur
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        String[] anonUrls = StringUtils.splitByWholeSeparatorPreserveAllTokens(properties.getAnonUris(), ",");
+        String[] anonUrls = StringUtils.splitByWholeSeparatorPreserveAllTokens(properties.getAnonUris(), StringConstant.COMMA);
         if (ArrayUtils.isEmpty(anonUrls)) {
             anonUrls = new String[]{};
         }

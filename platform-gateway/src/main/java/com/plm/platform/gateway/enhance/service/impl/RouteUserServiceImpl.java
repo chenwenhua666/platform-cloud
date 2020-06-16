@@ -1,6 +1,7 @@
 package com.plm.platform.gateway.enhance.service.impl;
 
 import com.plm.platform.common.core.entity.QueryRequest;
+import com.plm.platform.common.core.entity.constant.StringConstant;
 import com.plm.platform.common.core.utils.DateUtil;
 import com.plm.platform.gateway.enhance.entity.RouteUser;
 import com.plm.platform.gateway.enhance.mapper.RouteUserMapper;
@@ -60,7 +61,7 @@ public class RouteUserServiceImpl implements RouteUserService {
 
     @Override
     public Flux<RouteUser> delete(String ids) {
-        String[] idArray = StringUtils.splitByWholeSeparatorPreserveAllTokens(ids, ",");
+        String[] idArray = StringUtils.splitByWholeSeparatorPreserveAllTokens(ids, StringConstant.COMMA);
         return routeUserMapper.deleteByIdIn(Arrays.asList(idArray));
     }
 

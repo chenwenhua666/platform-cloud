@@ -1,6 +1,7 @@
 package com.plm.platform.gateway.enhance.service.impl;
 
 import com.plm.platform.common.core.entity.QueryRequest;
+import com.plm.platform.common.core.entity.constant.StringConstant;
 import com.plm.platform.common.core.utils.DateUtil;
 import com.plm.platform.gateway.enhance.entity.RouteLog;
 import com.plm.platform.gateway.enhance.mapper.RouteLogMapper;
@@ -52,7 +53,7 @@ public class RouteLogServiceImpl implements RouteLogService {
 
     @Override
     public Flux<RouteLog> delete(String ids) {
-        String[] idArray = StringUtils.splitByWholeSeparatorPreserveAllTokens(ids, ",");
+        String[] idArray = StringUtils.splitByWholeSeparatorPreserveAllTokens(ids, StringConstant.COMMA);
         return routeLogMapper.deleteByIdIn(Arrays.asList(idArray));
     }
 

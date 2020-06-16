@@ -1,3 +1,3 @@
 # Auto Configure
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.plm.platform.common.doc.starter.configure.PlatformDocAutoconfigure
+com.plm.platform.common.doc.starter.configure.PlatformDocAutoConfigure

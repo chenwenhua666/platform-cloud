@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @SpringBootApplication
 @EnablePlatformCloudResourceServer
 @EnableTransactionManagement
-@EnableDistributedTransaction
+// @EnableDistributedTransaction
 @MapperScan("com.plm.platform.server.foundation.mapper")
 public class PlatformServerFoundationApplication {
 

@@ -1,6 +1,7 @@
 package com.plm.platform.gateway.enhance.service.impl;
 
 import com.plm.platform.common.core.entity.QueryRequest;
+import com.plm.platform.common.core.entity.constant.StringConstant;
 import com.plm.platform.common.core.utils.DateUtil;
 import com.plm.platform.gateway.enhance.entity.BlockLog;
 import com.plm.platform.gateway.enhance.mapper.BlockLogMapper;
@@ -47,7 +48,7 @@ public class BlockLogServiceImpl implements BlockLogService {
 
     @Override
     public Flux<BlockLog> delete(String ids) {
-        String[] idArray = StringUtils.splitByWholeSeparatorPreserveAllTokens(ids, ",");
+        String[] idArray = StringUtils.splitByWholeSeparatorPreserveAllTokens(ids, StringConstant.COMMA);
         return blockLogMapper.deleteByIdIn(Arrays.asList(idArray));
     }
 

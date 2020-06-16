@@ -23,7 +23,7 @@ import org.springframework.util.Base64Utils;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableConfigurationProperties(PlatformCloudSecurityProperties.class)
 @ConditionalOnProperty(value = "platform.cloud.security.enable", havingValue = "true", matchIfMissing = true)
-public class PlatformCloudSecurityAutoconfigure {
+public class PlatformCloudSecurityAutoConfigure {
 
     @Bean
     @ConditionalOnMissingBean(name = "accessDeniedHandler")
