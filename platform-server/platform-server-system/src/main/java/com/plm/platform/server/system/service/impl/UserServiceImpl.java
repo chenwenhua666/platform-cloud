@@ -80,7 +80,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, SystemUser> impleme
         // 创建用户
         user.setCreateTime(new Date());
         user.setAvatar(SystemUser.DEFAULT_AVATAR);
-        // user.setPassword(passwordEncoder.encode(SystemUser.DEFAULT_PASSWORD));
         save(user);
         // 保存用户角色
         String[] roles = StringUtils.splitByWholeSeparatorPreserveAllTokens(user.getRoleId(), StringConstant.COMMA);

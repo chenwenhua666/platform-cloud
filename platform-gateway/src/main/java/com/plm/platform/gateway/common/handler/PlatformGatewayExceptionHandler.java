@@ -38,11 +38,12 @@ public class PlatformGatewayExceptionHandler extends DefaultErrorWebExceptionHan
                 request.path(), request.methodName(), error.getMessage()
         );
         String errorMessage;
+        String connection = "connection refused";
         if (error instanceof NotFoundException) {
             String serverId = StringUtils.substringAfterLast(error.getMessage(), "Unable to find instance for ");
             serverId = StringUtils.replace(serverId, "\"", StringUtils.EMPTY);
             errorMessage = String.format("无法找到%s服务", serverId);
-        } else if (StringUtils.containsIgnoreCase(error.getMessage(), "connection refused")) {
+        } else if (StringUtils.containsIgnoreCase(error.getMessage(), connection)) {
             errorMessage = "目标服务拒绝连接";
         } else if (error instanceof TimeoutException) {
             errorMessage = "访问服务超时";

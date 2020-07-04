@@ -22,7 +22,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
  *
  * @author crystal
  */
-// @Configuration
+@Configuration
 @EnableConfigurationProperties(PlatformLettuceRedisProperties.class)
 @ConditionalOnProperty(value = "platform.lettuce.redis.enable", havingValue = "true", matchIfMissing = true)
 public class PlatformLettuceRedisAutoConfigure {

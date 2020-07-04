@@ -24,6 +24,16 @@ public class DateUtil {
     public static final String CST_TIME_PATTERN = "EEE MMM dd HH:mm:ss zzz yyyy";
 
     /**
+     * 格式化时间，格式为 yyyy-MM-dd HH:mm:ss
+     *
+     * @param localDateTime LocalDateTime
+     * @return 格式化后的字符串
+     */
+    public static String formatSplitTime(LocalDateTime localDateTime) {
+        return formatFullTime(localDateTime, FULL_TIME_SPLIT_PATTERN);
+    }
+
+    /**
      * 格式化时间，格式为 yyyyMMddHHmmss
      *
      * @param localDateTime LocalDateTime

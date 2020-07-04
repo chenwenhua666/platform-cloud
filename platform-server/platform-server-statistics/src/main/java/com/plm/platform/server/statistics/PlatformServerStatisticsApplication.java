@@ -7,10 +7,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+/**
+ * @author crystal
+ */
 @SpringBootApplication
 @EnablePlatformCloudResourceServer
 @EnableFeignClients
-// @EnableTransactionManagement
+@EnableTransactionManagement
 @MapperScan("com.plm.platform.server.statistics.mapper")
 public class PlatformServerStatisticsApplication {
 

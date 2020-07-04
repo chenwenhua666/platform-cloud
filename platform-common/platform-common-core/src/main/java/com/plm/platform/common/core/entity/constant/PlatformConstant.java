@@ -28,7 +28,7 @@ public interface PlatformConstant {
     /**
      * 允许下载的文件类型，根据需求自己添加（小写）
      */
-    String[] VALID_FILE_TYPE = {"xlsx", "zip"};
+    String[] VALID_FILE_TYPE = {"xlsx", "zip", "pdf"};
 
     /**
      * 验证码 key前缀
