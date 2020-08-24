@@ -1,6 +1,6 @@
-FROM openjdk:8u212-jre
+FROM openjdk:8u252
 MAINTAINER crystal 764471698@qq.com
 
-COPY platform-tx-manager-2.0-RELEASE.jar /platform/platform-tx-manager-2.0-RELEASE.jar
+COPY ./target/platform-tx-manager-2.0-RELEASE.jar /platform/platform-tx-manager-2.0-RELEASE.jar
 
 ENTRYPOINT ["java", "-jar", "/platform/platform-tx-manager-2.0-RELEASE.jar"]

@@ -1,0 +1,28 @@
+v1:
+mysql.url=127.0.0.1
+redis.url=127.0.0.1
+mongo.url=127.0.0.1
+rabbitmq.url=127.0.0.1
+nacos.url=127.0.0.1
+platform-gateway=127.0.0.1
+platform-monitor-admin=127.0.0.1
+
+mysql.url=127.0.0.1;redis.url=127.0.0.1;rabbitmq.url=127.0.0.1;platform-gateway=127.0.0.1;platform-monitor-admin=127.0.0.1;platform-register=127.0.0.1
+
+zipkin
+java -jar zipkin.jar --server.port=9920 --zipkin.storage.type=mysql --zipkin.storage.mysql.db=platform_cloud_base --zipkin.storage.mysql.username=root --zipkin.storage.mysql.password=123456 --zipkin.storage.mysql.host=localhost --zipkin.storage.mysql.port=3306 --zipkin.collector.rabbitmq.addresses=localhost:5672 --zipkin.collector.rabbitmq.username=platform  --zipkin.collector.rabbitmq.password=123456a_
+
+v2:
+mysql.url=127.0.0.1
+redis.url=127.0.0.1
+nacos.url=127.0.0.1
+platform-gateway=127.0.0.1
+platform-admin=127.0.0.1
+platform-tx-manager=127.0.0.1
+
+ALTER USER 'root'@'localhost' IDENTIFIED BY '123456A_cwh'; 
+
+
+k8s Dashboard token
+kubectl -n kubernetes-dashboard describe secret $(kubectl -n kubernetes-dashboard get secret | grep dashboard-admin | awk '{print $1}')
+

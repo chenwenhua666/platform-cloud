@@ -14,11 +14,6 @@ spring:
         file-extension: yaml
       discovery:
         server-addr: ${nacos.url}:8001
-  boot:
-    admin:
-      client:
-        instance:
-          prefer-ip: true
 
 logging:
   level:
