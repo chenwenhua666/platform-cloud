@@ -1,6 +1,7 @@
 package com.plm.platform.auth.configure;
 
 import com.plm.platform.auth.properties.PlatformAuthProperties;
+import com.plm.platform.auth.service.impl.RedisAuthenticationCodeService;
 import com.plm.platform.auth.service.impl.RedisClientDetailsService;
 import com.plm.platform.auth.translator.PlatformWebResponseExceptionTranslator;
 import lombok.RequiredArgsConstructor;
@@ -43,6 +44,7 @@ public class PlatformAuthorizationServerConfigure extends AuthorizationServerCon
     private final PasswordEncoder passwordEncoder;
     private final PlatformWebResponseExceptionTranslator exceptionTranslator;
     private final PlatformAuthProperties properties;
+    private final RedisAuthenticationCodeService authenticationCodeService;
     private final RedisClientDetailsService redisClientDetailsService;
     private final RedisConnectionFactory redisConnectionFactory;
 
@@ -56,6 +58,7 @@ public class PlatformAuthorizationServerConfigure extends AuthorizationServerCon
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
         endpoints.tokenStore(tokenStore())
                 .userDetailsService(userDetailService)
+                .authorizationCodeServices(authenticationCodeService)
                 .authenticationManager(authenticationManager)
                 .exceptionTranslator(exceptionTranslator);
         if (properties.getEnableJwt()) {

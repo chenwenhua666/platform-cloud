@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.plm.platform.common.logging.starter.configure.PlatformLogAutoConfigure

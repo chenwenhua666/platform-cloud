@@ -17,6 +17,7 @@
         <module>platform-common-doc</module>
         <module>platform-common-doc-gateway-starter</module>
         <module>platform-common-doc-starter</module>
+        <module>platform-common-logging-starter</module>
     </modules>
 
     <artifactId>platform-common</artifactId>

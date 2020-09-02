@@ -33,6 +33,11 @@
             <version>${platform-cloud.version}</version>
         </dependency>
 		<dependency>
+			<groupId>com.plm</groupId>
+			<artifactId>platform-common-logging-starter</artifactId>
+			<version>${platform-cloud.version}</version>
+		</dependency>
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>

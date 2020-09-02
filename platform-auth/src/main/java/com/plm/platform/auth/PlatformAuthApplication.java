@@ -5,11 +5,13 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 
 /**
  * @author crystal
  */
 @SpringBootApplication
+@EnableRedisHttpSession
 @EnablePlatformCloudResourceServer
 @MapperScan("com.plm.platform.auth.mapper")
 public class PlatformAuthApplication {
