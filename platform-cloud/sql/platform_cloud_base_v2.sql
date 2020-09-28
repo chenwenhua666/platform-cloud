@@ -305,7 +305,7 @@ INSERT INTO `t_menu` VALUES (136, 10, '导出Excel', NULL, NULL, 'log:export', N
 INSERT INTO `t_menu` VALUES (150, 2, '登录日志', '/monitor/loginlog', 'platform/monitor/loginlog/Index', 'monitor:loginlog', '', '0', 3, '2019-07-22 13:41:17', '2020-04-13 11:38:08');
 INSERT INTO `t_menu` VALUES (151, 150, '删除日志', NULL, NULL, 'loginlog:delete', NULL, '1', NULL, '2019-07-22 13:43:04', NULL);
 INSERT INTO `t_menu` VALUES (152, 150, '导出Excel', NULL, NULL, 'loginlog:export', NULL, '1', NULL, '2019-07-22 13:43:30', NULL);
-INSERT INTO `t_menu` VALUES (154, 0, '其他模块', '/others', 'Layout', '', 'el-icon-shopping-bag-1', '0', 6, '2019-07-25 10:16:16', '2020-04-14 18:38:20');
+INSERT INTO `t_menu` VALUES (154, 0, '数据模块', '/others', 'Layout', '', 'el-icon-shopping-bag-1', '0', 6, '2019-07-25 10:16:16', '2020-06-18 16:43:03');
 INSERT INTO `t_menu` VALUES (156, 0, '代码生成', '/gen', 'Layout', '', 'el-icon-printer', '0', 4, '2019-07-25 10:24:03', '2020-01-16 13:59:49');
 INSERT INTO `t_menu` VALUES (157, 156, '基础配置', '/gen/config', 'platform/gen/config/Index', 'gen:config', '', '0', 1, '2019-07-25 10:24:55', '2020-04-09 14:21:54');
 INSERT INTO `t_menu` VALUES (158, 156, '生成代码', '/gen/generate', 'platform/gen/generate/Index', 'gen:generate', '', '0', 2, '2019-07-25 10:25:26', '2019-07-25 11:13:20');
@@ -337,6 +337,11 @@ INSERT INTO `t_menu` VALUES (191, 184, '立即执行一次', NULL, NULL, 'job:ru
 INSERT INTO `t_menu` VALUES (192, 184, '导出Excel', NULL, NULL, 'job:export', NULL, '1', NULL, '2020-04-14 19:01:59', NULL);
 INSERT INTO `t_menu` VALUES (193, 185, '删除', NULL, NULL, 'job:log:delete', NULL, '1', NULL, '2020-04-15 14:01:33', NULL);
 INSERT INTO `t_menu` VALUES (194, 185, '导出', NULL, NULL, 'job:log:export', NULL, '1', NULL, '2020-04-15 14:01:45', NULL);
+INSERT INTO `t_menu` VALUES (195, 0, '统计服务', '/statistics', 'Layout', '', 'el-icon-data-analysis', '0', 7, '2020-06-18 16:48:10', NULL);
+INSERT INTO `t_menu` VALUES (196, 195, '邮件工具', '/statistics/mail', 'platform/statistics/mail/Index', 'mail:view', '', '0', 1, '2020-06-18 16:51:39', '2020-06-18 16:52:09');
+INSERT INTO `t_menu` VALUES (197, 196, '发送邮件', NULL, NULL, 'mail:send', NULL, '1', NULL, '2020-06-21 13:55:28', NULL);
+INSERT INTO `t_menu` VALUES (198, 195, 'SQL工具', 'statitics/sql', 'platform/statistics/sql/Index', 'sql:view', '', '0', 2, '2020-09-25 09:56:08', '2020-09-28 16:49:00');
+INSERT INTO `t_menu` VALUES (199, 198, '执行', NULL, NULL, 'sql:run', NULL, '1', NULL, '2020-09-25 09:58:53', NULL);
 
 -- ----------------------------
 -- Table structure for t_role
@@ -428,7 +433,6 @@ INSERT INTO `t_role_menu` VALUES (2, 152);
 INSERT INTO `t_role_menu` VALUES (3, 152);
 INSERT INTO `t_role_menu` VALUES (1, 154);
 INSERT INTO `t_role_menu` VALUES (2, 154);
-INSERT INTO `t_role_menu` VALUES (1, 155);
 INSERT INTO `t_role_menu` VALUES (2, 155);
 INSERT INTO `t_role_menu` VALUES (1, 156);
 INSERT INTO `t_role_menu` VALUES (2, 156);
@@ -447,15 +451,10 @@ INSERT INTO `t_role_menu` VALUES (1, 165);
 INSERT INTO `t_role_menu` VALUES (1, 166);
 INSERT INTO `t_role_menu` VALUES (1, 167);
 INSERT INTO `t_role_menu` VALUES (2, 167);
-INSERT INTO `t_role_menu` VALUES (1, 168);
 INSERT INTO `t_role_menu` VALUES (2, 168);
-INSERT INTO `t_role_menu` VALUES (1, 169);
 INSERT INTO `t_role_menu` VALUES (2, 169);
-INSERT INTO `t_role_menu` VALUES (1, 170);
 INSERT INTO `t_role_menu` VALUES (2, 170);
-INSERT INTO `t_role_menu` VALUES (1, 171);
 INSERT INTO `t_role_menu` VALUES (2, 171);
-INSERT INTO `t_role_menu` VALUES (1, 172);
 INSERT INTO `t_role_menu` VALUES (2, 172);
 INSERT INTO `t_role_menu` VALUES (1, 173);
 INSERT INTO `t_role_menu` VALUES (2, 173);
@@ -474,7 +473,6 @@ INSERT INTO `t_role_menu` VALUES (2, 179);
 INSERT INTO `t_role_menu` VALUES (1, 180);
 INSERT INTO `t_role_menu` VALUES (2, 180);
 INSERT INTO `t_role_menu` VALUES (3, 180);
-INSERT INTO `t_role_menu` VALUES (1, 181);
 INSERT INTO `t_role_menu` VALUES (2, 181);
 INSERT INTO `t_role_menu` VALUES (1, 182);
 INSERT INTO `t_role_menu` VALUES (2, 182);
@@ -495,6 +493,11 @@ INSERT INTO `t_role_menu` VALUES (2, 192);
 INSERT INTO `t_role_menu` VALUES (1, 193);
 INSERT INTO `t_role_menu` VALUES (1, 194);
 INSERT INTO `t_role_menu` VALUES (2, 194);
+INSERT INTO `t_role_menu` VALUES (1, 195);
+INSERT INTO `t_role_menu` VALUES (1, 196);
+INSERT INTO `t_role_menu` VALUES (1, 197);
+INSERT INTO `t_role_menu` VALUES (1, 198);
+INSERT INTO `t_role_menu` VALUES (1, 199);
 
 -- ----------------------------
 -- Table structure for t_trade_log

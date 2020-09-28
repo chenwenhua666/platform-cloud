@@ -67,4 +67,5 @@ public interface StringConstant {
     String DOLLAR_LEFT_BRACE = "${";
     String HASH_LEFT_BRACE = "#{";
     String CRLF = "\r\n";
+    String SELECT = "select";
 }
