@@ -17,6 +17,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.FileSystemUtils;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
@@ -44,7 +45,7 @@ public class ReportServiceImpl implements ReportService {
         File file = new File(CustomConstant.FILE_PATH + fileName);
         TemplateUtil.createFileByTemplate(CustomConstant.PDF_TEMPLATE, file, data);
         FileUtil.download(CustomConstant.FILE_PATH + fileName, DOWNLOAD_NAME, true, response);
-        FileUtil.delete(CustomConstant.FILE_PATH);
+        FileSystemUtils.deleteRecursively(new File(CustomConstant.FILE_PATH));
     }
 
     @Override
