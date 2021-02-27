@@ -5,7 +5,7 @@ package com.plm.platform.common.core.exception;
  *
  * @author crystal
  */
-public class PlatformException extends Exception {
+public class PlatformException extends RuntimeException {
 
     private static final long serialVersionUID = -6916154462432027437L;
 

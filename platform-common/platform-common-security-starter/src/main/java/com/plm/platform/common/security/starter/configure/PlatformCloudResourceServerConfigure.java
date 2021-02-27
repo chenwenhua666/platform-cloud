@@ -1,5 +1,6 @@
 package com.plm.platform.common.security.starter.configure;
 
+import com.plm.platform.common.core.entity.constant.EndpointConstant;
 import com.plm.platform.common.core.entity.constant.StringConstant;
 import com.plm.platform.common.security.starter.handler.PlatformAccessDeniedHandler;
 import com.plm.platform.common.security.starter.handler.PlatformAuthExceptionEntryPoint;
@@ -25,28 +26,35 @@ public class PlatformCloudResourceServerConfigure extends ResourceServerConfigur
     private PlatformAccessDeniedHandler accessDeniedHandler;
     private PlatformAuthExceptionEntryPoint exceptionEntryPoint;
 
-    @Autowired
+    @Autowired(required = false)
     public void setProperties(PlatformCloudSecurityProperties properties) {
         this.properties = properties;
     }
 
-    @Autowired
+    @Autowired(required = false)
     public void setAccessDeniedHandler(PlatformAccessDeniedHandler accessDeniedHandler) {
         this.accessDeniedHandler = accessDeniedHandler;
     }
 
-    @Autowired
+    @Autowired(required = false)
     public void setExceptionEntryPoint(PlatformAuthExceptionEntryPoint exceptionEntryPoint) {
         this.exceptionEntryPoint = exceptionEntryPoint;
     }
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
+        if (properties == null) {
+            permitAll(http);
+            return;
+        }
         String[] anonUrls = StringUtils.splitByWholeSeparatorPreserveAllTokens(properties.getAnonUris(), StringConstant.COMMA);
         if (ArrayUtils.isEmpty(anonUrls)) {
             anonUrls = new String[]{};
         }
-
+        if (ArrayUtils.contains(anonUrls, EndpointConstant.ALL)) {
+            permitAll(http);
+            return;
+        }
         http.csrf().disable()
                 .requestMatchers().antMatchers(properties.getAuthUri())
                 .and()
@@ -59,7 +67,16 @@ public class PlatformCloudResourceServerConfigure extends ResourceServerConfigur
 
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) {
-        resources.authenticationEntryPoint(exceptionEntryPoint)
-                .accessDeniedHandler(accessDeniedHandler);
+        if (exceptionEntryPoint != null) {
+            resources.authenticationEntryPoint(exceptionEntryPoint);
+        }
+        if (accessDeniedHandler != null) {
+            resources.accessDeniedHandler(accessDeniedHandler);
+        }
+    }
+
+    private void permitAll(HttpSecurity http) throws Exception {
+        http.csrf().disable();
+        http.authorizeRequests().anyRequest().permitAll();
     }
 }

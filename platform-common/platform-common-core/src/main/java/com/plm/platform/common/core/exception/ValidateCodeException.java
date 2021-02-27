@@ -5,7 +5,7 @@ package com.plm.platform.common.core.exception;
  *
  * @author crystal
  */
-public class ValidateCodeException extends Exception {
+public class ValidateCodeException extends RuntimeException {
 
     private static final long serialVersionUID = 7514854456967620043L;
 
